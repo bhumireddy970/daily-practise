@@ -1,0 +1,55 @@
+DELIMITER //
+create procedure spgetAllEmployees( )
+Begin
+	select employee_id,employee_name,salary,
+	sum(salary) over(order by salary desc) as cummulative_salary,
+	row_number() over(order by salary desc) as S_no ,
+	rank()  over(order by salary desc) as employee_rank,
+	dense_rank()  over(order by salary desc) as employee_dense_rank
+	from employees;
+end //
+DELIMITER ;
+
+Drop procedure spgetAllEmployees;
+
+call spgetAllEmployees();
+
+-- parameter store procedure
+DELIMITER //
+create procedure spgetnthhighestsalaryemployeefromeachdepartment(val Int)
+Begin
+	select distinct employee_id,employee_name,salary,department from
+	(select  employee_id,employee_name,salary,department,
+	row_number()  over(partition by department order by salary desc) as employee_rank
+	from employees) as de where employee_rank=val;
+end //
+DELIMITER ;
+
+call spgetnthhighestsalaryemployeefromeachdepartment(2);
+
+-- parameter store procedure
+DELIMITER //
+create procedure spgetnthhighestsalaryfromallemployees(val Int)
+Begin
+	select distinct employee_id,employee_name,salary,department from
+	(select  employee_id,employee_name,salary,department,
+	row_number()  over( order by salary desc) as employee_rank
+	from employees) as de where employee_rank=val;
+end //
+DELIMITER ;
+
+drop procedure spgetnthhighestsalaryfromallemployees;
+
+call spgetnthhighestsalaryfromallemployees(10)
+
+
+
+-- get employess details whose salary is greater than something and from some department
+DELIMITER //
+create procedure  spgetemployeesbasedonconditions(dept varchar(50) , sal int)
+begin
+	select * from employees
+	where department=dept and salary > sal;
+end//
+DELIMITER
+call spgetemployeesbasedonconditions("Finance",60000);

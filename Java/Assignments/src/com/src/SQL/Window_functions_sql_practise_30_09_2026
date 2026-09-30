@@ -1,0 +1,56 @@
+-- Row number,Rank,Dense_Rank
+select employee_id,employee_name,salary,
+sum(salary) over(order by salary desc) as cummulative_salary,
+row_number() over(order by salary desc) as S_no ,
+rank()  over(order by salary desc) as employee_rank,
+dense_rank()  over(order by salary desc) as employee_dense_rank
+from employees;
+
+-- getting nth greatest salary using window functions
+select distinct employee_id,employee_name,salary,department from
+(select  employee_id,employee_name,salary,department,
+row_number()  over(partition by department order by salary desc) as employee_rank
+from employees) as de where employee_rank=2;
+
+-- Usages of Ntiles
+select  employee_id,employee_name,salary,department,
+ntile(3)  over(partition by salary) as division
+from employees;
+
+-- Usage of Lag
+select  employee_id,employee_name,salary,
+lag(salary)  over(order by employee_id) as prev_salary,department
+from employees;
+
+-- Usage of Lead
+select  employee_id,employee_name,salary,
+lead(salary)  over(order by employee_id) as prev_salary,department
+from employees;
+
+--  Usage of case
+select  employee_id,employee_name,salary,prev_salary,
+case
+when salary> prev_salary then "Higher than previous salary"
+when salary< prev_salary then "Lower than previous salary"
+when salary= prev_salary then "Equal to previous salary"
+end as comment
+from (select  employee_id,employee_name,salary,
+lag(salary)  over(order by employee_id) as prev_salary
+from employees) st;
+
+
+--   Usage of First_value()
+select  employee_id,employee_name,hire_date,
+first_value(hire_date)  over(order by hire_date) as First_hire_date
+from employees;
+
+--   Usage of Last_value() to find latest date for each departmrnt
+select  employee_id,employee_name,hire_date,
+last_value(hire_date)  over(partition by department order by hire_date RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) as Recent_hire_date
+from employees;
+
+--    to find latest date for overall
+select  employee_id,employee_name,hire_date,
+Max(hire_date)  over() as Recent_hire_date
+from employees;
+
