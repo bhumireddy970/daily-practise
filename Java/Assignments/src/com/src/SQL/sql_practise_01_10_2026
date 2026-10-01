@@ -1,0 +1,30 @@
+178. Rank Scores
+
+select score,
+dense_rank() over(order by score desc) as "rank"
+from Scores
+
+180. Consecutive Numbers
+
+with cte as(
+    select num,
+    lead(num) over() as "num1",
+    lead(num,2) over() as "num2"
+    from Logs
+
+)
+
+select distinct num as "ConsecutiveNums" from cte where num=num1 and num=num2;
+
+181. Employees Earning More Than Their Managers
+
+select e1.name Employee from Employee e1
+join Employee e2
+on e1.managerId  =e2.id
+where e1.salary>e2.salary;
+
+182. Duplicate Emails
+
+select email Email from Person
+Group by email
+Having count(email)>1;
