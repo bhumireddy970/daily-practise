@@ -27,4 +27,10 @@ public class UserController {
         return users.findAllUser();
     }
 
+    @PostMapping("/login")
+    public String login(@RequestBody Users user)
+    {
+        return users.verify(user);
+    }
+
 }
