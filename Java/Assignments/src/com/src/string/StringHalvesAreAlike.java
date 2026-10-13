@@ -1,4 +1,4 @@
-package com.src;
+package com.src.string;
 
 public class StringHalvesAreAlike {
     public static boolean halvesAreAlike(String s) {

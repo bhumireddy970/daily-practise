@@ -1,6 +1,4 @@
-package com.src;
-
-import java.util.Stack;
+package com.src.string;
 
 public class RobotReturnOrigin {
     public static boolean judgeCircle(String moves) {

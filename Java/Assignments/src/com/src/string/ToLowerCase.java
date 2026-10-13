@@ -1,4 +1,4 @@
-package com.src;
+package com.src.string;
 
 public class ToLowerCase {
     public static String toLowerCase(String s) {

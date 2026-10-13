@@ -1,4 +1,4 @@
-package com.src;
+package com.src.string;
 
 public class ImageFliipInvert {
     public static void main(String[] args) {

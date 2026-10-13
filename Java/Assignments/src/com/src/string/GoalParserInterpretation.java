@@ -1,4 +1,4 @@
-package com.src;
+package com.src.string;
 
 public class GoalParserInterpretation {
     public static String interpret(String command) {

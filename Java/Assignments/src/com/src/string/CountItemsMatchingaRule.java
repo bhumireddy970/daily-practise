@@ -1,6 +1,5 @@
-package com.src;
+package com.src.string;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CountItemsMatchingaRule {

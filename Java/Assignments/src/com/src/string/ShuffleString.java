@@ -1,4 +1,4 @@
-package com.src;
+package com.src.string;
 public class ShuffleString {
     public static String restoreString(String s, int[] indices) {
         char[] string = new char[s.length()];

@@ -1,4 +1,4 @@
-package com.src;
+package com.src.string;
 
 public class CheckIfTwoStringArraysareEquivalent {
     public static boolean arrayStringsAreEqual(String[] word1, String[] word2) {
