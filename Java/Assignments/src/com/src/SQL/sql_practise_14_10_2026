@@ -1,0 +1,19 @@
+3436. Find Valid Emails
+
+
+select * from Users where REGEXP_LIKE(email, '^[A-Za-z0-9_]+@[A-Za-z]+\\.com$')
+order by
+
+1789. Primary Department for Each Employee
+
+select employee_id,department_id
+from Employee
+where primary_flag="Y"
+union
+
+1633. Percentage of Users Attended a Contest
+
+select contest_id , round((count(user_id)*100)/(select count(*) from Users),2) as percentage
+from Register
+group by contest_id
+order by percentage desc,contest_id
