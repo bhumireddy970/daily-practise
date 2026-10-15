@@ -1,0 +1,31 @@
+3220. Odd and Even Transactions
+
+select transaction_date,
+IFNULL(sum(case when amount%2=1 then amount else 0 end),0) as odd_sum,
+IFNULL(sum(case when amount%2=0 then amount else 0 end),0) as even_sum
+from transactions
+group by  transaction_date
+order by transaction_date ;
+
+1693. Daily Leads and Partners
+
+select date_id , make_name,count(distinct lead_id) as unique_leads,
+count( distinct partner_id) as unique_partners
+from DailySales
+group by date_id,make_name
+order by date_id
+
+1890. The Latest Login in 2020
+
+select user_id ,max(time_stamp) as last_stamp from Logins
+where time_stamp  between '2020-01-01 00:00:00' and '2020-12-31 23:59:59'
+group by user_id
+
+1873. Calculate Special Bonus
+
+select  employee_id ,
+case
+    when employee_id%2=1 and name not like "m%" then salary else 0
+end
+ as bonus from Employees
+order by employee_id
