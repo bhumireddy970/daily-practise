@@ -1,0 +1,31 @@
+1068. Product Sales Analysis I
+
+select p.product_name ,s.year,s.price from sales s
+join product p
+on p.product_id = s.product_id
+
+1327. List the Products Ordered in a Period
+
+select p.product_name ,sum(o.unit) as unit from Orders o
+join Products p
+on p.product_id=o.product_id
+where order_date between '2020-02-01' and '2020-02-29'
+group by p.product_name
+having sum(o.unit)>=100
+
+1378. Replace Employee ID With The Unique Identifier
+
+select unique_id , name from Employees e
+left join EmployeeUNI eu
+on  e.id=eu.id
+
+185. Department Top Three Salaries
+
+with tempTable As(
+    select d.name as Department,e.name as Employee,e.salary as Salary,Dense_Rank() over(partition by d.id Order by e.Salary Desc) AS dr
+    from Employee e
+    join Department d on e.departmentId = d.id
+)
+
+select Department,Employee,Salary from tempTable
+where dr<=3;
