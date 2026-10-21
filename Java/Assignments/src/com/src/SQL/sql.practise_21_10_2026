@@ -1,0 +1,16 @@
+183. Customers Who Never Order
+
+select name as Customers from Customers where id not in (select customerId from Orders)
+
+196. Delete Duplicate Emails
+
+DELETE p1 FROM Person p1 JOIN Person p2
+WHERE p1.email = p2.email AND p1.id>p2.id
+
+197. Rising Temperature
+
+select t1.id from Weather t1  join Weather t2 on datediff(t1.recordDate,t2.recordDate)=1 where t1.temperature >t2.temperature
+
+511. Game Play Analysis I
+
+select player_id,min(event_date) as first_login from Activity group by player_id
