@@ -1,0 +1,13 @@
+3570. Find Books with No Available Copies
+
+select l.book_id,l.title,l.author,l.genre,l.publication_year,b.b_count as current_borrowers from library_books l
+left join (select book_id,count(book_id) as b_count from borrowing_records where return_date is null group by book_id having count(*)) b
+on l.book_id = b.book_id
+where l.total_copies=b.b_count
+order by current_borrowers desc, l.title asc;
+
+1741. Find Total Time Spent by Each Employee
+
+select event_day  as day,emp_id ,sum(out_time-in_time) as total_time from Employees
+group by event_day  ,emp_id
+
