@@ -1,0 +1,30 @@
+3793. Find Users with High Token Usage
+
+select user_id ,count(tokens) as prompt_count , round(avg(tokens),2) as avg_tokens
+from prompts
+group by user_id
+having count(user_id)>=3 and max(tokens) > avg(tokens)
+order by avg_tokens desc,user_id asc;
+
+3465. Find Products with Valid Serial Numbers
+
+select * from products
+where regexp_like(description,'\\bSN[0-9]{4}-[0-9]{4}\\b','c')
+order by product_id
+
+3475. DNA Pattern Recognition
+
+select sample_id,dna_sequence,species,
+case when regexp_like(dna_sequence,'^ATG') then 1 else 0 end as has_start,
+case when regexp_like(dna_sequence,'TAA$|TAG$|TGA$') then 1 else 0 end as has_stop,
+case when regexp_like(dna_sequence,'ATAT') then 1 else 0 end as has_atat,
+case when regexp_like(dna_sequence,'GGG') then 1 else 0 end as has_ggg
+from Samples
+order by sample_id;
+
+2356. Number of Unique Subjects Taught by Each Teacher
+
+select teacher_id ,count(distinct subject_id) as cnt
+from teacher
+group by teacher_id
+
