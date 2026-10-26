@@ -1,0 +1,100 @@
+# JavaScript Important Concepts – Short Notes
+
+## 1. `var`, `let`, and `const`
+
+These keywords are used to declare variables in JavaScript.
+
+- var: Function-scoped; can be redeclared and reassigned. It is not block-scoped.
+- let: Block-scoped; can be reassigned but cannot be redeclared in the same scope.
+- const: Block-scoped; cannot be reassigned or redeclared in the same scope.
+
+```
+var x = 10;
+let y = 20;
+const z = 30;
+```
+
+## 2. Arrow Functions
+
+Arrow functions provide a shorter syntax for writing functions without using the `function` keyword.
+
+```
+const add = (a, b) => a + b;
+console.log(add(10, 20)); // 30
+```
+
+## 3. Classes
+
+Classes are templates used to create objects with properties and methods. The constructor initializes an object when it is created.
+
+```
+class Test {
+    constructor() {
+        console.log("Welcome");
+    }
+}
+new Test();
+```
+
+## 4. Async/Await
+
+`async` and `await` are used to handle asynchronous operations, such as API calls and HTTP requests. They make asynchronous code easier to read.
+
+```
+async function getData() {
+    const response = await fetch("https://example.com");
+    const data = await response.json();
+    console.log(data);
+}
+```
+
+## 5. Destructuring
+
+Destructuring allows us to extract values from arrays or properties from objects into individual variables.
+
+```
+const person = { name: "Saradhi", age: 23 };
+const { name, age } = person;
+```
+
+## 6. Spread Operator (`...`)
+
+The spread operator expands the elements of an array or the properties of an object. It is useful for copying and combining arrays or objects.
+
+```
+const arr1 = [10, 20, 30];
+const arr2 = [...arr1, 40, 50];
+```
+
+## 7. `map()` and `filter()`
+
+- map(): Creates a new array by transforming each element of the original array.
+- filter(): Creates a new array containing only the elements that satisfy a specified condition.
+
+```
+const arr = [10, 20, 30, 40];
+
+const doubled = arr.map(e => e * 2);
+const even = arr.filter(e => e % 2 === 0);
+```
+
+## 8. Local Storage vs Session Storage
+
+Both are used to store key-value pairs in the browser.
+
+- Local Storage: Stores data that remains available even after closing and reopening the browser, until it is cleared.
+- Session Storage: Stores data for a particular tab session and is normally cleared when that session ends.
+
+```
+localStorage.setItem("name", "Saradhi");
+sessionStorage.setItem("name", "Saradhi");
+```
+
+## 9. Optional Chaining (`?.`)
+
+Optional chaining allows us to access nested object properties safely when a property might be `null` or `undefined`. It returns `undefined` instead of throwing an error in such cases.
+
+```
+const user = {};
+console.log(user.address?.city); // undefined
+```
