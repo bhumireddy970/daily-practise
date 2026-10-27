@@ -1,0 +1,22 @@
+620. Not Boring Movies
+
+select * from cinema where id%2=1 and description not like "boring"
+order by rating desc
+
+619. Biggest Single Number
+
+select max(num) as num from (select num from mynumbers group by num having count(*)=1) as number
+
+1075. Project Employees I
+
+select p.project_id,round(avg(experience_years),2) as average_years from project p
+join employee e
+on p.employee_id=e.employee_id
+group by project_id
+
+1141. User Activity for the Past 30 Days I
+
+select activity_date as day,count(distinct user_id) as active_users
+from Activity
+where activity_date between '2019-06-28' and '2019-07-27'
+group by activity_date
