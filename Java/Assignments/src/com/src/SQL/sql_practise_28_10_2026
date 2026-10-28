@@ -1,0 +1,57 @@
+1907. Count Salary Categories
+
+with temp as(
+    select
+        sum(case when income<20000 then 1 else 0 end) as low,
+        sum(case when income>=20000 and income<=50000 then 1 else 0 end) as avg,
+        sum(case when income>50000 then 1 else 0 end) as high
+    from Accounts
+
+)
+select 'Low Salary' as category,low as accounts_count from temp
+union all
+select'Average Salary' as category,avg as accounts_count from temp
+union all
+select'High Salary' as category,high as accounts_count from temp
+
+1148. Article Views I
+
+select author_id as id from views
+where author_id=viewer_id
+group by author_id
+order by id
+
+1204. Last Person to Fit in the Bus
+
+with temp as(
+    select *,sum(weight) over(order by turn) as rt from Queue
+)
+
+select person_name from temp
+where rt<=1000
+order by rt desc
+limit 1;
+
+1795. Rearrange Products Table
+
+
+select
+    product_id,
+    'store1' as store,
+    store1 as price
+from  products
+where store1 is not null
+union all
+select
+    product_id,
+    'store2' as store,
+    store2 as price
+from  products
+where store2 is not null
+union all
+select
+    product_id,
+    'store3' as store,
+    store3 as price
+from  products
+where store3 is not null
